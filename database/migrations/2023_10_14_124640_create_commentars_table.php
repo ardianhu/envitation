@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('commentars', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('invitation_id');
+            $table->foreign('invitation_id')->references('id')->on('invitations');
             $table->string('name');
-            $table->integer('number')->nullable();
-            $table->string('email')->unique();
-            $table->string('avatar');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('commentar');
+            $table->enum('confirmation', ['hadir', 'tidak hadir', 'masih ragu'])->default('masih ragu');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('commentars');
     }
 };
