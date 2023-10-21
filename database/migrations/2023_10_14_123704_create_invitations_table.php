@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('theme_id')->nullable();
             $table->unsignedBigInteger('gallery_id')->nullable();
             $table->unsignedBigInteger('story_id')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('sub_title')->nullable();
             $table->string('location');
-            $table->string('location_coordinate')->nulllable();
+            $table->string('location_coordinate')->nullable();
             $table->date('date');
             $table->time('time');
             $table->string('url');

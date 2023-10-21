@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvitationController;
+use App\Models\Invitation;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +19,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
+Route::get('/login', function () {
+    return view('auth.login');
+});
+// Route::post('/login', [AuthController::class, 'login']);
+// Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+// Route::post('/register', 'Auth\RegisterController@register');
+Route::get('/login', [AuthController::class, 'showLoginForm']);
+Route::get('/register', [AuthController::class, 'showRegisterForm']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/dashboard', [HomeController::class, 'dashboard']);
+// Route::post('/login', [Auth\LoginController::class, 'login']);
+
+Route::get('/create_invitation', [HomeController::class, 'create_invitation']);
+Route::post('/add-invitation', [InvitationController::class, 'store']);
+
+Route::get('/{url}', [InvitationController::class, 'show']);
