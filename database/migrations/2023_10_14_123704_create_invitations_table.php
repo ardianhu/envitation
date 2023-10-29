@@ -22,7 +22,8 @@ return new class extends Migration
             $table->foreign('gallery_id')->references('id')->on('galleries');
             $table->foreign('story_id')->references('id')->on('stories');
             $table->string('title');
-            $table->string('sub_title')->nullable();
+            $table->string('male');
+            $table->string('female');
             $table->string('location');
             $table->string('location_coordinate')->nullable();
             $table->date('date');

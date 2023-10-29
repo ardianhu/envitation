@@ -11,6 +11,9 @@ class AuthController extends Controller
     //
     public function showLoginForm()
     {
+        if (Auth::check()){
+            return redirect('/dashboard');
+        }
         return view('auth.login');
     }
     public function showRegisterForm()
@@ -23,9 +26,17 @@ class AuthController extends Controller
         $password   = $request->input('password');
 
         if (auth()->attempt(['email' => $email, 'password' => $password])) {
-            return response()->json([
-                'success' => true
-            ], 200);
+            if (auth()->user()->is_admin) {
+                return response()->json([
+                    'success' => true,
+                    'is_admin' => true
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => true,
+                    'is_admin' => false
+                ], 200);
+            }
         } else {
             return response()->json([
                 'success' => false,
@@ -57,5 +68,9 @@ class AuthController extends Controller
 
         // Return a JSON response
         return response()->json(['success' => true]);
+    }
+    public function logout(){
+        auth()->logout();
+        return redirect('/');
     }
 }

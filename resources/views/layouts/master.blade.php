@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
     @vite('resources/css/app.css')
     <script src="{{ asset('storage/assets/jquery.js') }}"></script>
+    <!-- <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css"> -->
 </head>
 
 @section('body')
@@ -25,10 +27,10 @@
     </div>
     <script>
         function bukaNav(collapseID) {
-        document.getElementById(collapseID).classList.toggle("hidden");
-        document.getElementById(collapseID).classList.toggle("block");
-        // console.log("works");
-    }
+            document.getElementById(collapseID).classList.toggle("hidden");
+            document.getElementById(collapseID).classList.toggle("block");
+            // console.log("works");
+        }
     </script>
 </body>
 

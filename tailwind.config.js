@@ -5,7 +5,11 @@ export default {
     "./resources/**/**/*.blade.php",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        elsie : ['Elsie'],
+      }
+    },
   },
   plugins: [],
 }

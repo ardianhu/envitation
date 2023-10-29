@@ -8,16 +8,24 @@
     }
 </style> -->
 <div class="p-4 sm:ml-64 mt-14">
-    <div class="max-w-4xl mx-auto mt-28 bg-slate-100 border-blue-500 border rounded-md p-20">
+    <h1 class="text-2xl font-semibold text-gray-800 mb-4">Buat Undangan</h1>
+    <div class="p-4 bg-white">
+        <h1 class="text-xl text-gray-800 py-4">Masukkan data di bawah ini</h1>
         <form class="" id="addInvitation">
             @csrf
             <div class="relative z-0 w-full mb-6 group">
-                <input type="text" name="title" id="title" onfocus="deleteUrlValue()" onblur="copyTheValue()" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                <input type="text" name="title" id="title" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                 <label for="title" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Title</label>
             </div>
-            <div class="relative z-0 w-full mb-6 group">
-                <input type="text" name="subtitle" id="subtitle" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                <label for="subtitle" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Sub Title</label>
+            <div class="grid md:grid-cols-2 md:gap-6">
+                <div class="relative z-0 w-full mb-6 group">
+                    <input type="text" name="male" id="male" onfocus="deleteUrlValue()" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="male" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Pria</label>
+                </div>
+                <div class="relative z-0 w-full mb-6 group">
+                    <input type="text" name="female" id="female" onblur="copyTheValue()" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="female" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Wanita</label>
+                </div>
             </div>
             <div class="relative z-0 w-full mb-6 group">
                 <input type="text" name="location" id="location" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -54,17 +62,21 @@
             input.value = domain;
         }
     }
-    function deleteUrlValue(){
+
+    function deleteUrlValue() {
         $('#url').val('envitation.test/');
     }
+
     function copyTheValue() {
-        const title = $('#title').val();
-        const titleNoSpace = title.replace(/\s/g, '-');
+        const male = $('#male').val();
+        const female = $('#female').val();
+        const male_female = male + '&' + female;
         const domain = $('#url').val();
-        $('#url').val(domain + titleNoSpace);
+        $('#url').val(domain + male_female);
     }
+
     $(function() {
-        $('#addInvitation').submit(function(e){
+        $('#addInvitation').submit(function(e) {
             e.preventDefault();
             $.ajax({
                 url: '/add-invitation',
@@ -72,14 +84,25 @@
                 data: {
                     theme_id: 1,
                     title: $("#title").val(),
-                    sub_title: $("#subtitle").val(),
+                    male: $("#male").val(),
+                    female: $("#female").val(),
                     location: $("#location").val(),
                     date: $("#date").val(),
                     time: $("#time").val(),
                     url: $("#url").val(),
                     music: $("#music").val(),
                     _token: '{{ csrf_token() }}'
-                }
+                },
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: 'Undangan berhasil dibuat!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    // window.location.href = "/dashboard";
+                },
             })
 
         })
