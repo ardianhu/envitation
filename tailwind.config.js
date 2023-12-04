@@ -3,6 +3,10 @@ export default {
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/**/*.blade.php",
+    "./node_modules/flowbite/**/*.js"
+  ],
+  safelist: [
+    'bg-slate-700',
   ],
   theme: {
     extend: {
@@ -11,6 +15,8 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin'),
+  ],
 }
 

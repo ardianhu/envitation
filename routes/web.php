@@ -50,5 +50,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::delete('/delete_user', [AdminController::class, 'delete_user']);
     Route::get('/edit_user', [AdminController::class, 'edit_user']);
     Route::post('/update_user', [AdminController::class, 'update_user']);
+    Route::get('/pyscript', [AdminController::class, 'pyscript']);
 });
 Route::get('/{url}', [InvitationController::class, 'show']);

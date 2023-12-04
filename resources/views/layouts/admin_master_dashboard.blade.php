@@ -11,7 +11,7 @@
     <script src="{{ asset('storage/assets/DataTables/datatables.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('storage/assets/DataTables/Responsive-2.5.0/css/responsive.dataTables.min.css') }}"></link>
     <script src="{{ asset('storage/assets/DataTables/Responsive-2.5.0/js/responsive.dataTables.min.js') }}"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" /> -->
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script> -->
 
@@ -26,7 +26,7 @@
 
 @section('body')
 
-<body class="text-gray-800 bg-gray-100 antialiased">
+<body class="text-gray-800 bg-gray-100 antialiased max-w-full">
     @show
     <div>
         @include('layouts.admin_sidebar')
@@ -34,7 +34,7 @@
             @yield('contentadmindash')
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script> -->
 </body>
 
 </html>
