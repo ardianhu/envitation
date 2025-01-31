@@ -35,7 +35,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // Route::post('/login', [Auth\LoginController::class, 'login']);
 
-Route::group(['middleware' => 'user'], function (){
+Route::group(['middleware' => 'user'], function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard']);
     Route::get('/create_invitation', [HomeController::class, 'create_invitation']);
     Route::post('/add-invitation', [InvitationController::class, 'store']);
@@ -52,4 +52,4 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/update_user', [AdminController::class, 'update_user']);
     Route::get('/pyscript', [AdminController::class, 'pyscript']);
 });
-Route::get('/{url}', [InvitationController::class, 'show']);
+Route::get('/{url}/{receiver}', [InvitationController::class, 'show']);

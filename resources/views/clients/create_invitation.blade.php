@@ -55,56 +55,61 @@
         </form>
     </div>
 </div>
-<script>
-    function extendInputValue(input) {
-        const domain = "envitation.test/";
-        if (!input.value.startsWith(domain)) {
-            input.value = domain;
+<script type="module">
+    $(document).ready(function() {
+        function extendInputValue(input) {
+            const domain = "envitation.test/";
+            if (!input.value.startsWith(domain)) {
+                input.value = domain;
+            }
         }
-    }
+        window.extendInputValue = extendInputValue;
 
-    function deleteUrlValue() {
-        $('#url').val('envitation.test/');
-    }
+        function deleteUrlValue() {
+            $('#url').val('envitation.test/');
+        }
+        window.deleteUrlValue = deleteUrlValue;
 
-    function copyTheValue() {
-        const male = $('#male').val();
-        const female = $('#female').val();
-        const male_female = male + '&' + female;
-        const domain = $('#url').val();
-        $('#url').val(domain + male_female);
-    }
+        function copyTheValue() {
+            const male = $('#male').val();
+            const female = $('#female').val();
+            const male_female = male + '&' + female;
+            const domain = $('#url').val();
+            $('#url').val(domain + male_female);
+        }
+        window.copyTheValue = copyTheValue;
 
-    $(function() {
-        $('#addInvitation').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: '/add-invitation',
-                type: 'POST',
-                data: {
-                    theme_id: 1,
-                    title: $("#title").val(),
-                    male: $("#male").val(),
-                    female: $("#female").val(),
-                    location: $("#location").val(),
-                    date: $("#date").val(),
-                    time: $("#time").val(),
-                    url: $("#url").val(),
-                    music: $("#music").val(),
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil',
-                        text: 'Undangan berhasil dibuat!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    // window.location.href = "/dashboard";
-                },
+        $(function() {
+            $('#addInvitation').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/add-invitation',
+                    type: 'POST',
+                    data: {
+                        theme_id: 1,
+                        title: $("#title").val(),
+                        male: $("#male").val(),
+                        female: $("#female").val(),
+                        location: $("#location").val(),
+                        date: $("#date").val(),
+                        time: $("#time").val(),
+                        url: $("#url").val(),
+                        music: $("#music").val(),
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Undangan berhasil dibuat!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        // window.location.href = "/dashboard";
+                    },
+                })
+
             })
-
         })
     })
 </script>

@@ -80,7 +80,7 @@
         </footer>
     </section>
 </main>
-<script>
+<script type="module">
     $(document).ready(function() {
         // Listen for form submission
         $("form").on("submit", function(e) {
@@ -99,7 +99,7 @@
                     // Handle the response from the server, e.g., redirect or display a message
                     if (response.success) {
                         console.log('berhasil')
-                        if (response.is_admin){
+                        if (response.is_admin) {
                             window.location.href = "{{ url('/admin') }}"
                         } else {
                             window.location.href = "{{ url('/dashboard') }}";
